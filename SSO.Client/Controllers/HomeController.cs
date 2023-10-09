@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using SSO.Client.Models;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace SSO.Client.Controllers
 {
@@ -21,6 +23,25 @@ namespace SSO.Client.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Weather()
+        {
+            using var client = new HttpClient();
+
+            var result = await client
+                .GetAsync("https://localhost:7150/weatherforecast");
+
+            if (result.IsSuccessStatusCode)
+            {
+                var model = await result.Content.ReadAsStringAsync();
+
+                var data = JsonConvert.DeserializeObject<List<WeatherData>>(model);
+
+                return View(data);
+            }
+
+            throw new Exception("Unable to get content");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
