@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace SSO.IdentityServer;
 
@@ -16,6 +17,26 @@ public static class Config
             { };
 
     public static IEnumerable<Client> Clients =>
-        new Client[] 
-            { };
+        new Client[]
+        {
+            new Client()
+            {
+                ClientName = "SSO",
+                ClientId = "ssoclient",
+                AllowedGrantTypes = GrantTypes.Code,
+                RedirectUris =
+                {
+                    "https:/localhost:7151/signin-oidc"
+                },
+                AllowedScopes =
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile
+                },
+                ClientSecrets =
+                {
+                    new Secret("secret".Sha256())
+                },
+            }
+        };
 }
