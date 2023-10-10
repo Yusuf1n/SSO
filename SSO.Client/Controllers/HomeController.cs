@@ -2,10 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using SSO.Client.Models;
 using System.Diagnostics;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
 
 namespace SSO.Client.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,8 +19,10 @@ namespace SSO.Client.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await LogIdentityInformation();
+
             return View();
         }
 
@@ -48,6 +54,24 @@ namespace SSO.Client.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task LogIdentityInformation()
+        {
+            // get the saved identity token
+            var identityToken = await HttpContext
+                .GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+
+            var userClaimsStringBuilder = new StringBuilder();
+            foreach (var claim in User.Claims)
+            {
+                userClaimsStringBuilder.AppendLine(
+                    $"Claim type: {claim.Type} - Claim value: {claim.Value}");
+            }
+
+            // log token & claims
+            _logger.LogInformation($"Identity token & user claims: " +
+                                   $"\n{identityToken} \n{userClaimsStringBuilder}");
         }
     }
 }
