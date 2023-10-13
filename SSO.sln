@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.Client", "SSO.Client\SSO.Client.csproj", "{0099140E-E5B0-4037-A420-370A7053721D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.Client", "SSO.Client\SSO.Client.csproj", "{0099140E-E5B0-4037-A420-370A7053721D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.API", "SSO.API\SSO.API.csproj", "{1E22538D-0F82-4605-B765-F9F7F3BF1200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.API", "SSO.API\SSO.API.csproj", "{1E22538D-0F82-4605-B765-F9F7F3BF1200}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.IdentityServer", "SSO.IdentityServer\SSO.IdentityServer.csproj", "{873F52A6-9404-4A9F-A69F-95452BE2D0A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.Client2", "SSO.Client2\SSO.Client2.csproj", "{33400F02-BD1A-4E58-8069-D9C5DAF226B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.Authorization", "SSO.Authorisation\SSO.Authorization.csproj", "{4E999244-459B-482C-82E7-8C506A35271C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{33400F02-BD1A-4E58-8069-D9C5DAF226B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33400F02-BD1A-4E58-8069-D9C5DAF226B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33400F02-BD1A-4E58-8069-D9C5DAF226B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E999244-459B-482C-82E7-8C506A35271C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E999244-459B-482C-82E7-8C506A35271C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E999244-459B-482C-82E7-8C506A35271C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E999244-459B-482C-82E7-8C506A35271C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

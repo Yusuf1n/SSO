@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using SSO.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,9 @@ builder.Services.AddAuthentication(options =>
         options.ClaimActions.DeleteClaim("sid");
         options.ClaimActions.DeleteClaim("idp");
         options.Scope.Add("roles");
+        options.Scope.Add("country");
         options.ClaimActions.MapJsonKey("role", "role");
+        options.ClaimActions.MapUniqueJsonKey("country", "country");
         options.TokenValidationParameters = new()
         {
             NameClaimType = "given_name",
@@ -42,6 +45,11 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddAuthorization(authorizationOptions =>
+{
+    authorizationOptions.AddPolicy("CanAccessUsersScreen",
+        AuthorizationPolicies.CanAccessUsersScreen());
+});
 
 var app = builder.Build();
 
