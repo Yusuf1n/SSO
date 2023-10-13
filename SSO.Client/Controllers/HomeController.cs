@@ -50,7 +50,8 @@ namespace SSO.Client.Controllers
             throw new Exception("Unable to get content");
         }
 
-        [Authorize(Roles = "PayingUser")]
+        [Authorize(Policy = "CanAccessUsersScreen")]
+        //[Authorize(Roles = "PayingUser")]
         public IActionResult Users()
         {
             return View();
