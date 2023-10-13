@@ -47,31 +47,6 @@ public static class Config
                     new Secret("secret".Sha256())
                 },
                 RequireConsent = true
-            },
-            //new Client()
-            //{
-            //ClientName = "SSO2",
-            //ClientId = "ssoclient2",
-            //AllowedGrantTypes = GrantTypes.Code,
-            //RedirectUris =
-            //{
-            //"https://localhost:7152/signin-oidc"
-            //},
-            //PostLogoutRedirectUris =
-            //{
-            //"https://localhost:7152/signout-callback-oidc"
-            //},
-            //AllowedScopes =
-            //{
-            //IdentityServerConstants.StandardScopes.OpenId,
-            //IdentityServerConstants.StandardScopes.Profile,
-            //"roles"
-            //},
-            //ClientSecrets =
-            //{
-            //new Secret("secret2".Sha256())
-            //},
-            //RequireConsent = true
-            //}
+            }
         };
 }
