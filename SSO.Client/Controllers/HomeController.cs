@@ -69,6 +69,9 @@ namespace SSO.Client.Controllers
             var identityToken = await HttpContext
                 .GetTokenAsync(OpenIdConnectParameterNames.IdToken);
 
+            var refreshToken = await HttpContext
+                .GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
             var userClaimsStringBuilder = new StringBuilder();
             foreach (var claim in User.Claims)
             {
@@ -79,6 +82,8 @@ namespace SSO.Client.Controllers
             // log token & claims
             _logger.LogInformation($"Identity token & user claims: " +
                                    $"\n{identityToken} \n{userClaimsStringBuilder}");
+            _logger.LogInformation($"Refresh token " + 
+                                   $"\n{refreshToken}");
         }
     }
 }

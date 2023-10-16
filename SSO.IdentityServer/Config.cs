@@ -28,6 +28,8 @@ public static class Config
                 ClientName = "SSO",
                 ClientId = "ssoclient",
                 AllowedGrantTypes = GrantTypes.Code,
+                AllowOfflineAccess = true,
+                UpdateAccessTokenClaimsOnRefresh = true,
                 AccessTokenLifetime = 60,
                 // AuthorizationCodeLifetime = ...
                 // IdentityTokenLifetime = ...
