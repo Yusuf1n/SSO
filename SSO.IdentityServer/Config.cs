@@ -28,6 +28,9 @@ public static class Config
                 ClientName = "SSO",
                 ClientId = "ssoclient",
                 AllowedGrantTypes = GrantTypes.Code,
+                AccessTokenLifetime = 60,
+                // AuthorizationCodeLifetime = ...
+                // IdentityTokenLifetime = ...
                 RedirectUris =
                 {
                     "https://localhost:7151/signin-oidc",
