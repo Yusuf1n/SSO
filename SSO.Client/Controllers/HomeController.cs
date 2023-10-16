@@ -9,7 +9,8 @@ using Newtonsoft.Json;
 
 namespace SSO.Client.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "CanAccessClient1Application")]
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

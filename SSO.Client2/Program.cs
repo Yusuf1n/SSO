@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using SSO.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,8 @@ builder.Services.AddAuthentication(options =>
     {
         options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.Authority = "https://localhost:9001/";
-        options.ClientId = "ssoclient";
-        options.ClientSecret = "secret";
+        options.ClientId = "democlient";
+        options.ClientSecret = "demo";
         options.ResponseType = "code";
         //options.Scope.Add("openid");
         //options.Scope.Add("profile");
@@ -30,10 +31,15 @@ builder.Services.AddAuthentication(options =>
         options.ClaimActions.Remove("aud");
         options.ClaimActions.DeleteClaim("sid");
         options.ClaimActions.DeleteClaim("idp");
-        options.Scope.Add("roles");
-        options.ClaimActions.MapJsonKey("role", "role");
+        options.Scope.Add("clients");
+        options.ClaimActions.MapJsonKey("client", "client");
     });
 
+builder.Services.AddAuthorization(authorizationOptions =>
+{
+    authorizationOptions.AddPolicy("CanAccessClient2Application",
+        AuthorizationPolicies.CanAccessClient2Application());
+});
 
 var app = builder.Build();
 

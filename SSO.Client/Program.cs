@@ -36,8 +36,10 @@ builder.Services.AddAuthentication(options =>
         options.ClaimActions.DeleteClaim("idp");
         options.Scope.Add("roles");
         options.Scope.Add("country");
+        options.Scope.Add("clients");
         options.Scope.Add("offline_access");
         options.ClaimActions.MapJsonKey("role", "role");
+        options.ClaimActions.MapJsonKey("client", "client");
         options.ClaimActions.MapUniqueJsonKey("country", "country");
         options.TokenValidationParameters = new()
         {
@@ -50,6 +52,9 @@ builder.Services.AddAuthorization(authorizationOptions =>
 {
     authorizationOptions.AddPolicy("CanAccessUsersScreen",
         AuthorizationPolicies.CanAccessUsersScreen());
+
+    authorizationOptions.AddPolicy("CanAccessClient1Application",
+        AuthorizationPolicies.CanAccessClient1Application());
 });
 
 var app = builder.Build();
