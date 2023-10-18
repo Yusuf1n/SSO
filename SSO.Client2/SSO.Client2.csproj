@@ -15,4 +15,8 @@
     <ProjectReference Include="..\SSO.Authorisation\SSO.Authorization.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Authentication\" />
+  </ItemGroup>
+
 </Project>
