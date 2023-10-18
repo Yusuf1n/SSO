@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using SSO.IdentityServer.DbContexts;
 
 namespace SSO.IdentityServer;
 
@@ -7,6 +9,13 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddRazorPages();
+
+        builder.Services.AddDbContext<IdentityDbContext>(options =>
+        {
+            options.UseSqlServer(
+                builder.Configuration
+                    .GetConnectionString("IdentityDBConnectionString"));
+        });
 
         builder.Services.AddIdentityServer(options =>
             {
