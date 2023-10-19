@@ -28,5 +28,13 @@ namespace SSO.Authorization
                 .RequireClaim("client", "client1")
                 .Build();
         }
+
+        public static AuthorizationPolicy CanAccessClientBlazorApplication()
+        {
+            return new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .RequireClaim("client", "clientblazor")
+                .Build();
+        }
     }
 }

@@ -137,6 +137,13 @@ namespace SSO.IdentityServer.DbContexts
                 UserId = new Guid("5f05b022-764e-48c7-a200-c50e9ff062ea"),
                 Type = "client",
                 Value = "client2"
+             },
+             new UserClaim()
+             {
+                 Id = Guid.NewGuid(),
+                 UserId = new Guid("5f05b022-764e-48c7-a200-c50e9ff062ea"),
+                 Type = "client",
+                 Value = "clientblazor"
              });
         }
 

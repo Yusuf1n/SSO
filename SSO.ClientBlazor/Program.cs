@@ -45,8 +45,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(authorizationOptions =>
 {
-    authorizationOptions.AddPolicy("CanAccessClient2Application",
-        AuthorizationPolicies.CanAccessClient2Application());
+    authorizationOptions.AddPolicy("CanAccessClientBlazorApplication",
+        AuthorizationPolicies.CanAccessClientBlazorApplication());
 });
 
 var app = builder.Build();

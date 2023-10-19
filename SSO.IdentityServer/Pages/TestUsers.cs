@@ -49,7 +49,8 @@ public class TestUsers
                     Claims = new List<Claim>
                     {
                         new Claim(JwtClaimTypes.GivenName, "Muhammad"),
-                        new Claim("client", "client2")
+                        new Claim("client", "client2"), 
+                        new Claim("client", "clientblazor")
                     }
             }
             };
