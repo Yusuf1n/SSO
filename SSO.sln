@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.Client2", "SSO.Client2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.Authorization", "SSO.Authorisation\SSO.Authorization.csproj", "{4E999244-459B-482C-82E7-8C506A35271C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.ClientBlazor", "SSO.ClientBlazor\SSO.ClientBlazor.csproj", "{C7362C8D-11FB-4368-AF52-060F14E8654C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4E999244-459B-482C-82E7-8C506A35271C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E999244-459B-482C-82E7-8C506A35271C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E999244-459B-482C-82E7-8C506A35271C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7362C8D-11FB-4368-AF52-060F14E8654C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7362C8D-11FB-4368-AF52-060F14E8654C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7362C8D-11FB-4368-AF52-060F14E8654C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7362C8D-11FB-4368-AF52-060F14E8654C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
