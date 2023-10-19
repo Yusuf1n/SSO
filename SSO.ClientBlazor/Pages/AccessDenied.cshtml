@@ -1,0 +1,30 @@
+﻿@page "/Authentication/AccessDenied"
+@model SSO.ClientBlazor.Pages.AccessDeniedModel
+
+@* @{
+    Layout = null;
+}
+ *@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access Denied</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+</head>
+
+<body>
+<div>
+    <div class="container">
+        <form method="post">
+            <div class="h3">You are not authorized to view this page</div>
+            <div>Would you prefer to <button type="submit" class="btn btn-outline-success">Login as someone else</button> ?</div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

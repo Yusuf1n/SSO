@@ -1,7 +1,9 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Web
 @namespace SSO.ClientBlazor.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [Authorize(Policy = "CanAccessClient2Application")]
 
 <!DOCTYPE html>
 <html lang="en">

@@ -38,12 +38,14 @@ public static class Config
                 RedirectUris =
                 {
                     "https://localhost:7151/signin-oidc",
-                    "https://localhost:7152/signin-oidc"
+                    "https://localhost:7152/signin-oidc",
+                    "https://localhost:7153/signin-oidc"
                 },
                 PostLogoutRedirectUris = 
                 {
                     "https://localhost:7151/signout-callback-oidc",
-                    "https://localhost:7152/signout-callback-oidc"
+                    "https://localhost:7152/signout-callback-oidc",
+                    "https://localhost:7153/signout-callback-oidc"
                 },
                 AllowedScopes =
                 {
@@ -67,12 +69,14 @@ public static class Config
                 RedirectUris =
                 {
                     "https://localhost:7151/signin-oidc",
-                    "https://localhost:7152/signin-oidc"
+                    "https://localhost:7152/signin-oidc",
+                    "https://localhost:7153/signin-oidc"
                 },
                 PostLogoutRedirectUris = 
                 {
                     "https://localhost:7151/signout-callback-oidc",
-                    "https://localhost:7152/signout-callback-oidc"
+                    "https://localhost:7152/signout-callback-oidc",
+                    "https://localhost:7153/signout-callback-oidc"
                 },
                 AllowedScopes =
                 {
