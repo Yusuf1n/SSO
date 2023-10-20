@@ -58,7 +58,7 @@ namespace SSO.IdentityServer.Pages.User.Registration
                 Password = Input.Password,
                 UserName = Input.UserName,
                 Subject = Guid.NewGuid().ToString(),
-                Active = false
+                Active = true
             };
 
             userToCreate.Claims.Add(new Entities.UserClaim()

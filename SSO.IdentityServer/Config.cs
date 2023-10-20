@@ -59,7 +59,7 @@ public static class Config
                 {
                     new Secret("secret".Sha256())
                 },
-                RequireConsent = true
+                //RequireConsent = true
             },
             new Client()
             {
@@ -88,7 +88,7 @@ public static class Config
                 {
                     new Secret("demo".Sha256())
                 },
-                RequireConsent = true
+                //RequireConsent = true
             }
         };
 }
