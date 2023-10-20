@@ -55,7 +55,6 @@ namespace SSO.IdentityServer.Pages.User.Registration
             // create user & claims
             var userToCreate = new Entities.User
             {
-                Password = Input.Password,
                 UserName = Input.UserName,
                 Subject = Guid.NewGuid().ToString(),
                 Active = true

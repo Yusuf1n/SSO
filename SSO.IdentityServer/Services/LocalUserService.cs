@@ -9,12 +9,16 @@ namespace SSO.IdentityServer.Services;
 public class LocalUserService : ILocalUserService
 {
     private readonly IdentityDbContext _context;
+    private readonly IPasswordHasher<User> _passwordHasher;
 
     public LocalUserService(
-        IdentityDbContext context)
+        IdentityDbContext context,
+        IPasswordHasher<User> passwordHasher)
     {
         _context = context ??
                    throw new ArgumentNullException(nameof(context));
+        _passwordHasher = passwordHasher ??
+                    throw new ArgumentNullException(nameof(passwordHasher));
     }
 
     public async Task<bool> IsUserActive(string subject)
@@ -57,12 +61,11 @@ public class LocalUserService : ILocalUserService
 
         // Validate credentials
         // return (user.Password == password);
-        //var verificationResult =
-        //    _passwordHasher.VerifyHashedPassword(
-        //        user, user.Password, password);
-        //return (verificationResult == PasswordVerificationResult.Success);
 
-        return true;
+        var verificationResult =
+            _passwordHasher.VerifyHashedPassword(
+                user, user.Password, password);
+        return (verificationResult == PasswordVerificationResult.Success);
     }
 
     public async Task<User> GetUserByUserNameAsync(string userName)
@@ -121,9 +124,9 @@ public class LocalUserService : ILocalUserService
         //    RandomNumberGenerator.GetBytes(128));
         //userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
 
-        //// hash & salt the password
-        //userToAdd.Password =
-        //    _passwordHasher.HashPassword(userToAdd, password);
+        // hash & salt the password
+        userToAdd.Password =
+            _passwordHasher.HashPassword(userToAdd, password);
 
         _context.Users.Add(userToAdd);
     }
