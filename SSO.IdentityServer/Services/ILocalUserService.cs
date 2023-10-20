@@ -24,5 +24,7 @@ public interface ILocalUserService
     (User userToAdd,
         string password);
 
+    Task<bool> ActivateUserAsync(string securityCode);
+
     Task<bool> SaveChangesAsync();
 }

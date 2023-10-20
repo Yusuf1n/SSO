@@ -34,6 +34,7 @@ namespace SSO.IdentityServer.DbContexts
                     Password = "AQAAAAEAACcQAAAAEIi0HEeTvqcxwhA+dR/RKOEIfdGn1VIKy0P+AhKOp5vIdsb80zmPxqbhxllt5AmkKg==",
                     Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
                     UserName = "David",
+                    Email = "david@someprovider.com",
                     Active = true
                 },
                 new User()
@@ -42,6 +43,7 @@ namespace SSO.IdentityServer.DbContexts
                     Password = "AQAAAAEAACcQAAAAEHgXILmaP4pu/Kz8M2cASmfD/XsHykcmTNyFTvQQiwyWaLWjWAlxBH1L5pQfSyRYqw==",
                     Subject = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
                     UserName = "Yusuf",
+                    Email = "yusufnaheem1@gmail.com",
                     Active = true
                 },
                 new User()
@@ -50,6 +52,7 @@ namespace SSO.IdentityServer.DbContexts
                     Password = "AQAAAAEAACcQAAAAEHgXILmaP4pu/Kz8M2cASmfD/XsHykcmTNyFTvQQiwyWaLWjWAlxBH1L5pQfSyRYqw==",
                     Subject = "e7ea84c8-b140-4e56-85a8-b0df8b4b4fc6",
                     UserName = "Muhammad",
+                    Email = "muhammad@someprovider.com",
                     Active = true
                 });
 

@@ -11,6 +11,12 @@ public class InputModel
     [Display(Name = "Username")]
     public string UserName { get; set; }
 
+    [Required]
+    [MaxLength(200)]
+    [Display(Name = "Email")]
+    [EmailAddress]
+    public string Email { get; set; }
+
     [MaxLength(200)]
     [DataType(DataType.Password)]
     [Display(Name = "Password")]
