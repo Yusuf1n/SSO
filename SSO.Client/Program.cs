@@ -22,7 +22,7 @@ builder.Services.AddAuthentication(options =>
     .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
     {
         options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        options.Authority = "https://localhost:9001/";
+        options.Authority = "https://localhost:44300/";
         options.ClientId = "ssoclient";
         options.ClientSecret = "secret";
         options.ResponseType = "code";
