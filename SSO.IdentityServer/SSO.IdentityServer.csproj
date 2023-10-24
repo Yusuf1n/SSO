@@ -15,4 +15,12 @@
 
 		<PackageReference Include="Serilog.AspNetCore" Version="6.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Windows\Index.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Pages\Windows\Index.cshtml" />
+	</ItemGroup>
 </Project>

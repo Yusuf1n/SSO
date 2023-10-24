@@ -29,10 +29,10 @@ public class LocalUserProfileService : IProfileService
 
     public async Task IsActiveAsync(IsActiveContext context)
     {
-        //context.IsActive = true;
+        context.IsActive = true;
 
-        var subjectId = context.Subject.GetSubjectId();
-        context.IsActive = await _localUserService
-            .IsUserActive(subjectId);
+        //var subjectId = context.Subject.GetSubjectId();
+        //context.IsActive = await _localUserService
+        //    .IsUserActive(subjectId);
     }
 }
