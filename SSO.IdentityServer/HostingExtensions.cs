@@ -1,3 +1,4 @@
+using Duende.IdentityServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -46,6 +47,22 @@ internal static class HostingExtensions
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients);
+
+        builder.Services
+            .AddAuthentication()
+            .AddOpenIdConnect("AAD", "Azure Active Directory", options =>
+            {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                options.Authority = "https://login.microsoftonline.com/47ebb02b-1114-43a9-aec8-1c5493356c69/v2.0";
+                options.ClientId = "76249b42-a328-4250-ac05-8507110d0cb5";
+                options.ClientSecret = "Mz28Q~I3VIwJnfyklV4KNB01x~s8Yh52sh9elbCh";
+                options.ResponseType = "code";
+                options.CallbackPath = new PathString("/signin-aad/");
+                options.SignedOutCallbackPath = new PathString("/signout-aad/");
+                options.Scope.Add("email");
+                options.Scope.Add("offline_access");
+                options.SaveTokens = true;
+            });
 
         return builder.Build();
     }
