@@ -1,9 +1,18 @@
-﻿using SSO.IdentityServer.Entities;
+﻿using System.Security.Claims;
+using SSO.IdentityServer.Entities;
 
 namespace SSO.IdentityServer.Services;
 
 public interface ILocalUserService
 {
+    Task<User> FindUserByExternalProviderAsync(
+        string provider,
+        string providerIdentityKey);
+
+    public User AutoProvisionUser(string provider,
+        string providerIdentityKey,
+        IEnumerable<Claim> claims);
+
     Task<bool> IsUserActive(
         string subject);
 
