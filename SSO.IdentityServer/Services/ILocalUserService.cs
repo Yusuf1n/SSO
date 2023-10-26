@@ -5,6 +5,13 @@ namespace SSO.IdentityServer.Services;
 
 public interface ILocalUserService
 {
+    Task<User> GetUserByEmailAsync(string email);
+
+    Task AddExternalProviderToUser(
+        string subject,
+        string provider,
+        string providerIdentityKey);
+
     Task<User> FindUserByExternalProviderAsync(
         string provider,
         string providerIdentityKey);

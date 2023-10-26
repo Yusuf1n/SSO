@@ -82,25 +82,54 @@ public class Callback : PageModel
             var claims = externalUser.Claims.ToList();
             claims.Remove(userIdClaim);
 
-            var mappedClaims = new List<Claim>();
-            // map the claims, and ignore those for which no
-            // mapping exists
-            foreach (var claim in claims)
+            // different external login providers often require different
+            // ways of handling 
+            // provisioning / linking
+            if (provider == "AAD")
             {
-                if (_facebookClaimTypeMap.ContainsKey(claim.Type))
+                // get email claim value
+                var emailFromAzureAD = externalUser.Claims
+                  .FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Value;
+
+                if (!string.IsNullOrEmpty(emailFromAzureAD))
                 {
-                    mappedClaims.Add(
-                        new Claim(_facebookClaimTypeMap[claim.Type],
-                            claim.Value));
+                    // try to find a user with matching email
+                    user = await _localUserService
+                        .GetUserByEmailAsync(emailFromAzureAD);
+
+                    // if it exists, add AAD as a provider
+                    if (user != null)
+                    {
+                        await _localUserService.AddExternalProviderToUser(
+                            user.Subject, provider, providerUserId);
+                        await _localUserService.SaveChangesAsync();
+                    }
+
+                    // note: creating a new user if no match is found is
+                    // a common practice - we won't do that, we already
+                    // did that in our Facebook integration sample
+
                 }
             }
-            mappedClaims.Add(new Claim("role", "FreeUser"));
-            mappedClaims.Add(new Claim("country", "be"));
+                var mappedClaims = new List<Claim>();
+                // map the claims, and ignore those for which no
+                // mapping exists
+                foreach (var claim in claims)
+                {
+                    if (_facebookClaimTypeMap.ContainsKey(claim.Type))
+                    {
+                        mappedClaims.Add(
+                            new Claim(_facebookClaimTypeMap[claim.Type],
+                            claim.Value));
+                    }
+                }
+                mappedClaims.Add(new Claim("role", "FreeUser"));
+                mappedClaims.Add(new Claim("country", "be"));
 
-            // auto-provision the user
-            user = _localUserService.AutoProvisionUser(
-                provider, providerUserId, mappedClaims.ToList());
-            await _localUserService.SaveChangesAsync();
+                // auto-provision the user
+                user = _localUserService.AutoProvisionUser(
+                    provider, providerUserId, mappedClaims.ToList());
+                await _localUserService.SaveChangesAsync();
         }
 
         // this allows us to collect any additional claims or properties
