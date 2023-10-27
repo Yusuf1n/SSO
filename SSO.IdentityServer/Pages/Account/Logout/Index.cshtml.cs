@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SSO.IdentityServer.Pages.Logout;
+namespace IdentityServerHost.Pages.Logout;
 
 [SecurityHeaders]
 [AllowAnonymous]

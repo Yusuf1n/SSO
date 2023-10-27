@@ -1,4 +1,4 @@
-namespace SSO.IdentityServer.Pages.Device;
+namespace IdentityServerHost.Pages.Device;
 
 public class InputModel
 {

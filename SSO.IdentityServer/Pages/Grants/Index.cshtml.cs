@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SSO.IdentityServer.Pages.Grants;
+namespace IdentityServerHost.Pages.Grants;
 
 [SecurityHeaders]
 [Authorize]

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SSO.IdentityServer.Pages.ExternalLogin;
+namespace IdentityServerHost.Pages.ExternalLogin;
 
 [AllowAnonymous]
 [SecurityHeaders]

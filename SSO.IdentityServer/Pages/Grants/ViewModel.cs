@@ -1,4 +1,4 @@
-namespace SSO.IdentityServer.Pages.Grants;
+namespace IdentityServerHost.Pages.Grants;
 
 public class ViewModel
 {

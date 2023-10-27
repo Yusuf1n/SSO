@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using SSO.IdentityServer.Areas.Identity.Data;
+using SSO.IdentityServer.Data;
 
 namespace SSO.IdentityServer;
 
@@ -6,6 +10,17 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+
+        var connectionString = builder.Configuration.GetConnectionString("SSOIdentityServerContextConnection")
+                               ?? throw new InvalidOperationException("Connection string 'SSOIdentityServerContextConnection' not found");
+
+        builder.Services.AddDbContext<SSOIdentityServerContext>(options =>
+            options.UseSqlServer(connectionString));
+
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<SSOIdentityServerContext>()
+            .AddDefaultTokenProviders();
+
         builder.Services.AddRazorPages();
 
         builder.Services.AddIdentityServer(options =>
@@ -16,7 +31,7 @@ internal static class HostingExtensions
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
-            .AddTestUsers(TestUsers.Users);
+            .AddAspNetIdentity<ApplicationUser>();
 
         return builder.Build();
     }
