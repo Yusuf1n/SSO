@@ -11,6 +11,8 @@ namespace SSO.IdentityServer.DbContexts
         
         public DbSet<UserLogin> UserLogins { get; set; }
 
+        public DbSet<UserSecret> UserSecrets { get; set; }
+
         public IdentityDbContext(
           DbContextOptions<IdentityDbContext> options)
         : base(options)
