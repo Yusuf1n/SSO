@@ -51,7 +51,7 @@ public class IndexModel : PageModel
 
         var keyUri = string.Format(
             "otpauth://totp/{0}:{1}?secret={2}&issuer={0}",
-            WebUtility.UrlEncode("Yusuf"),
+            WebUtility.UrlEncode("SSO Project"),
             WebUtility.UrlEncode(user.Email),
             secret);
 
