@@ -155,6 +155,24 @@ public class LocalUserService : ILocalUserService
         return true;
     }
 
+    public async Task<UserSecret> GetUserSecretAsync(
+        string subject, string name)
+    {
+        if (string.IsNullOrWhiteSpace(subject))
+        {
+            throw new ArgumentNullException(nameof(subject));
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        return await _context.UserSecrets
+            .FirstOrDefaultAsync(u => u.User.Subject == subject && u.Name == name);
+    }
+
+
     public async Task<bool> IsUserActive(string subject)
     {
         if (string.IsNullOrWhiteSpace(subject))

@@ -5,6 +5,8 @@ namespace SSO.IdentityServer.Services;
 
 public interface ILocalUserService
 {
+    Task<UserSecret> GetUserSecretAsync(string subject, string name);
+
     Task<bool> AddUserSecret(string subject, string name, string secret);
 
     Task<User> GetUserByEmailAsync(string email);
