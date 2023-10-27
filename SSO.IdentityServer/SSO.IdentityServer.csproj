@@ -24,4 +24,8 @@
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="Pages\Windows\Index.cshtml" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\MfaRegistration\" />
+	</ItemGroup>
 </Project>
