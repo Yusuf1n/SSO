@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SSO.IdentityServer.DbContexts;
 using SSO.IdentityServer.Services;
+using System.Reflection;
 
 namespace SSO.IdentityServer;
 
@@ -38,15 +39,27 @@ internal static class HostingExtensions
                     .GetConnectionString("IdentityDBConnectionString"));
         });
 
+        var migrationsAssembly = typeof(Program).GetTypeInfo()
+            .Assembly.GetName().Name;
+
         builder.Services.AddIdentityServer(options =>
             {
                 // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
                 options.EmitStaticAudienceClaim = true;
             })
             .AddProfileService<LocalUserProfileService>()
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients);
+            //.AddInMemoryIdentityResources(Config.IdentityResources)
+            //.AddInMemoryApiScopes(Config.ApiScopes)
+            //.AddInMemoryClients(Config.Clients);
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = optionsBuilder =>
+                    optionsBuilder.UseSqlServer(
+                        builder.Configuration
+                            .GetConnectionString("IdentityServerDBConnectionString"),
+                        sqlOptions => sqlOptions
+                            .MigrationsAssembly(migrationsAssembly));
+            }).AddConfigurationStoreCache();
 
         builder.Services
             .AddAuthentication()
