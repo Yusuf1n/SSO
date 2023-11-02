@@ -1,10 +1,12 @@
 using Duende.IdentityServer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SSO.IdentityServer.DbContexts;
 using SSO.IdentityServer.Services;
 using System.Reflection;
+using Azure.Identity;
 
 namespace SSO.IdentityServer;
 
@@ -24,6 +26,14 @@ internal static class HostingExtensions
             iis.AuthenticationDisplayName = "Windows";
             iis.AutomaticAuthentication = false;
         });
+
+        builder.Services.AddDataProtection()
+            .PersistKeysToAzureBlobStorage(
+                new Uri(builder.Configuration["DataProtection:Keys"]),
+                new DefaultAzureCredential())
+            .ProtectKeysWithAzureKeyVault(
+                new Uri(builder.Configuration["DataProtection:ProtectionKeyForKeys"]),
+                new DefaultAzureCredential());
 
         builder.Services.AddRazorPages();
 
