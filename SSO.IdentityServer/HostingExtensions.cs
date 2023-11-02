@@ -59,7 +59,16 @@ internal static class HostingExtensions
                             .GetConnectionString("IdentityServerDBConnectionString"),
                         sqlOptions => sqlOptions
                             .MigrationsAssembly(migrationsAssembly));
-            }).AddConfigurationStoreCache();
+            }).AddConfigurationStoreCache()
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = optionsBuilder =>
+                    optionsBuilder.UseSqlServer(builder.Configuration
+                            .GetConnectionString("IdentityServerDBConnectionString"),
+                        sqlOptions => sqlOptions
+                            .MigrationsAssembly(migrationsAssembly));
+                options.EnableTokenCleanup = true;
+            });
 
         builder.Services
             .AddAuthentication()
