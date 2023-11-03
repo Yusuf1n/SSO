@@ -9,6 +9,7 @@ using System.Reflection;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace SSO.IdentityServer;
 
@@ -127,11 +128,19 @@ internal static class HostingExtensions
                     options.AppSecret = "932da2a6ca6467d93c342829e60bc723";
                 });
 
+        builder.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor
+                                       | ForwardedHeaders.XForwardedProto;
+        });
+
         return builder.Build();
     }
     
     public static WebApplication ConfigurePipeline(this WebApplication app)
-    { 
+    {
+        app.UseForwardedHeaders();
+
         app.UseSerilogRequestLogging();
     
         if (app.Environment.IsDevelopment())
