@@ -7,6 +7,8 @@ using SSO.IdentityServer.DbContexts;
 using SSO.IdentityServer.Services;
 using System.Reflection;
 using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SSO.IdentityServer;
 
@@ -27,13 +29,32 @@ internal static class HostingExtensions
             iis.AutomaticAuthentication = false;
         });
 
+        var azureCredential = new DefaultAzureCredential();
+
         builder.Services.AddDataProtection()
             .PersistKeysToAzureBlobStorage(
                 new Uri(builder.Configuration["DataProtection:Keys"]),
-                new DefaultAzureCredential())
+                azureCredential)
             .ProtectKeysWithAzureKeyVault(
                 new Uri(builder.Configuration["DataProtection:ProtectionKeyForKeys"]),
-                new DefaultAzureCredential());
+                azureCredential);
+
+        var secretClient = new SecretClient(
+            new Uri(builder.Configuration["KeyVault:RootUri"]),
+            azureCredential);
+
+        var secretResponse = secretClient.GetSecret(
+            builder.Configuration["KeyVault:CertificateName"]);
+
+        var signingCertificate = new X509Certificate2(
+            Convert.FromBase64String(secretResponse.Value.Value),
+            (string)null,
+            X509KeyStorageFlags.MachineKeySet);
+
+        // certificate in KeyVault: 
+        //  - certificate resource (public key, metadata)
+        //  - key resource (private key)
+        //  - secret resource (full certificate)
 
         builder.Services.AddRazorPages();
 
@@ -78,7 +99,8 @@ internal static class HostingExtensions
                         sqlOptions => sqlOptions
                             .MigrationsAssembly(migrationsAssembly));
                 options.EnableTokenCleanup = true;
-            });
+            })
+            .AddSigningCredential(signingCertificate);
 
         builder.Services
             .AddAuthentication()
